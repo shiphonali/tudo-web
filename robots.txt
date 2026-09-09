@@ -1,0 +1,11 @@
+# TUDO robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /settings.html
+Disallow: /messages.html
+Disallow: /onboarding.html
+Disallow: /likes.html
+Disallow: /notifications.html
+
+Sitemap: https://tudo.example/sitemap.xml

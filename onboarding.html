@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Welcome to TUDO · Complete Your Profile</title>
+  <meta name="description" content="Finish setting up your TUDO profile to get better matches." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+  <div data-nav></div>
+  <main class="section" style="padding-top:calc(var(--nav-h) + 40px)">
+    <div class="wrap" style="max-width:820px">
+      <div class="center mb-3">
+        <p class="eyebrow" style="justify-content:center">Welcome to TUDO</p>
+        <h1 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">You're in, <span class="serif-accent grad-text" id="welcomeName">friend</span>.</h1>
+        <p class="lead" style="margin-inline:auto">A complete profile gets far more genuine matches. Here's what's left.</p>
+      </div>
+
+      <div class="panel flex items-center gap-2 wrap-f mb-3" data-reveal>
+        <div class="progress-ring" id="completionRing" style="--p:78"><span><span id="completionPct">78</span>%</span></div>
+        <div style="flex:1;min-width:220px">
+          <h2 class="h3" style="margin:0">Your profile is <span id="completionText">78%</span> complete</h2>
+          <p class="muted text-sm">Finish these to unlock the best of TUDO.</p>
+        </div>
+        <a class="btn btn--primary" href="discover.html">Skip for now →</a>
+      </div>
+
+      <div class="grid cols-2 mb-3" id="tasks"></div>
+
+      <div class="panel" data-reveal>
+        <h2 class="h3">Answer a prompt</h2>
+        <p class="muted text-sm mb-2">Prompts spark better first messages. Pick one to answer.</p>
+        <div class="field"><select class="select" id="promptSelect"></select></div>
+        <div class="field"><textarea class="textarea" id="promptAnswer" placeholder="Your answer…"></textarea></div>
+        <button class="btn btn--gold" id="savePrompt">Save prompt</button>
+      </div>
+
+      <div class="center mt-4">
+        <a class="btn btn--primary btn--lg" href="discover.html" data-magnetic>Start discovering people</a>
+      </div>
+    </div>
+  </main>
+  <div data-footer></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script>(function(){
+    boot('');
+    const s = store.get('session'); if (s && s.name) { document.getElementById('welcomeName').textContent = s.name; }
+
+    const tasks = [
+      { t: 'Add another photo', d: 'Profiles with 3+ photos get more matches.', done: false, w: 8 },
+      { t: 'Write a stronger bio', d: 'Two honest lines go a long way.', done: false, w: 6 },
+      { t: 'Add three interests', d: 'We use these for compatibility insights.', done: true, w: 0 },
+      { t: 'Verify your profile', d: 'Earn a trust badge with photo verification.', done: false, w: 8 },
+    ];
+    const host = document.getElementById('tasks');
+    host.innerHTML = tasks.map((x, i) => `
+      <div class="card flex between items-center gap-1" data-reveal data-reveal-delay="${i % 3}">
+        <div><strong>${x.t}</strong><p class="muted text-sm" style="margin:.2rem 0 0">${x.d}</p></div>
+        ${x.done ? '<span class="badge-verify">Done</span>' : `<button class="btn btn--ghost btn--sm" data-w="${x.w}">Do it</button>`}
+      </div>`).join('');
+
+    let pct = 78;
+    host.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-w]'); if (!b) return;
+      pct = Math.min(100, pct + (+b.dataset.w));
+      document.getElementById('completionRing').style.setProperty('--p', pct);
+      document.getElementById('completionPct').textContent = pct;
+      document.getElementById('completionText').textContent = pct + '%';
+      b.outerHTML = '<span class="badge-verify">Done</span>';
+      toast('Nice — profile strength up!', 'check');
+    });
+
+    const sel = document.getElementById('promptSelect');
+    sel.innerHTML = PROMPTS.map(p => `<option>${p}</option>`).join('');
+    document.getElementById('savePrompt').addEventListener('click', () => {
+      const a = document.getElementById('promptAnswer').value.trim();
+      if (!a) { toast('Write an answer first ✍️', 'x'); return; }
+      store.set('prompt', { q: sel.value, a });
+      toast('Prompt saved to your profile.', 'check');
+    });
+  
+})();</script>
+</body>
+</html>

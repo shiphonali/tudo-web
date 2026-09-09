@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>TUDO | Meet Bangladeshi Singles Worldwide</title>
+  <meta name="description" content="Discover meaningful connections with Bangladeshi singles in Bangladesh, the UK and around the world on TUDO. Verified profiles, private conversations and smarter compatibility." />
+  <meta name="theme-color" content="#07130F" />
+  <link rel="canonical" href="https://tudo.example/" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="TUDO" />
+  <meta property="og:title" content="TUDO — Bangladeshi Hearts. Real Connections." />
+  <meta property="og:description" content="Meet genuine Bangladeshi singles looking for meaningful relationships — verified, private and worldwide." />
+  <meta property="og:image" content="assets/images/hero/slide1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TUDO — Bangladeshi Hearts. Real Connections." />
+  <meta name="twitter:description" content="Meet genuine Bangladeshi singles worldwide on TUDO." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"TUDO","url":"https://tudo.example/","description":"A modern dating and matchmaking platform for Bangladeshi singles worldwide.","sameAs":["https://facebook.com","https://instagram.com"]}
+  </script>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader" aria-hidden="true">
+    <div style="text-align:center">
+      <div class="logo__mark loader__mark" style="width:72px;height:72px;margin:auto"></div>
+      <p>Finding meaningful connections…</p>
+    </div>
+  </div>
+<div data-nav></div>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" data-hero aria-label="Featured">
+    <div class="slides"></div>
+    <canvas id="tudo-particles" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="hero__content" data-hero-content></div>
+    </div>
+    <div class="hero__controls">
+      <div class="wrap">
+        <div class="progress" data-progress></div>
+        <div class="hero__arrows">
+          <button class="btn btn--icon btn--ghost" data-prev aria-label="Previous slide"></button>
+          <button class="btn btn--icon btn--ghost" data-next aria-label="Next slide"></button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== QUICK MATCH SEARCH ===== -->
+  <section class="quick-search" aria-label="Quick match search">
+    <div class="wrap">
+      <form class="qs__panel glass" data-quicksearch>
+        <p class="text-sm muted mb-2" style="margin:0 0 1rem"><span class="serif-accent gold">Find your person.</span> <span data-rotate-line>Find <span data-rotator class="rotator"></span> with TUDO.</span></p>
+        <div class="qs__grid">
+          <div class="qs__field"><label data-i18n="qs.iam">I am</label>
+            <select class="select" name="gender"><option>Woman</option><option>Man</option><option>Non-binary</option></select></div>
+          <div class="qs__field"><label data-i18n="qs.looking">Looking for</label>
+            <select class="select" name="seeking"><option>Men</option><option>Women</option><option>Everyone</option></select></div>
+          <div class="qs__field"><label data-i18n="qs.agefrom">Age from</label>
+            <select class="select" name="ageFrom" id="ageFrom"></select></div>
+          <div class="qs__field"><label data-i18n="qs.ageto">Age to</label>
+            <select class="select" name="ageTo" id="ageTo"></select></div>
+          <div class="qs__field"><label data-i18n="qs.location">Current location</label>
+            <select class="select" name="country">
+              <option>Bangladesh</option><option>United Kingdom</option><option>United States</option>
+              <option>Canada</option><option>Australia</option><option>UAE</option><option>Europe</option>
+            </select></div>
+          <div class="qs__field qs__field--btn">
+            <label data-i18n="qs.goal">Goal</label>
+            <div class="flex gap-1">
+              <select class="select" name="goal" style="flex:1">
+                <option>Serious Relationship</option><option>Marriage</option><option>Dating</option><option>Friendship</option><option>Open to Exploring</option>
+              </select>
+              <button class="btn btn--primary" type="submit" data-i18n="qs.find">Find Matches</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== TRUST STATISTICS ===== -->
+  <section class="section section--tight">
+    <div class="wrap center">
+      <p class="eyebrow" style="justify-content:center" data-reveal>A trusted, growing community</p>
+      <div class="grid cols-4 mt-2" id="stats-grid"></div>
+      <p class="text-xs muted mt-2" data-reveal>Demo figures shown for illustration until verified live data is published.</p>
+    </div>
+  </section>
+
+  <!-- ===== HOW TUDO WORKS ===== -->
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="center" style="max-width:640px;margin-inline:auto" data-reveal>
+        <p class="eyebrow" style="justify-content:center">How TUDO works</p>
+        <h2 class="h2">Four steps to a <span class="serif-accent grad-text">genuine connection</span>.</h2>
+      </div>
+      <div class="grid cols-4 mt-4 hiw">
+        <div class="card card--hover" data-reveal data-reveal-delay="1"><div class="hiw__no">01</div><h3 class="h3" style="margin-top:.6rem">Create Your Profile</h3><p class="muted text-sm">Tell TUDO about yourself, your interests and the kind of relationship you want.</p></div>
+        <div class="card card--hover" data-reveal data-reveal-delay="2"><div class="hiw__no">02</div><h3 class="h3" style="margin-top:.6rem">Verify Yourself</h3><p class="muted text-sm">Complete phone &amp; email checks, plus optional enhanced identity verification.</p></div>
+        <div class="card card--hover" data-reveal data-reveal-delay="3"><div class="hiw__no">03</div><h3 class="h3" style="margin-top:.6rem">Discover People</h3><p class="muted text-sm">Explore people based on preferences, interests and thoughtful compatibility.</p></div>
+        <div class="card card--hover" data-reveal data-reveal-delay="4"><div class="hiw__no">04</div><h3 class="h3" style="margin-top:.6rem">Match &amp; Connect</h3><p class="muted text-sm">When interest is mutual, start a safe, private conversation.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DISCOVER PEOPLE ===== -->
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="flex between items-center wrap-f mb-3" data-reveal>
+        <div><p class="eyebrow">Discover people</p><h2 class="h2" style="margin:0">Faces you might just <span class="serif-accent grad-text">click</span> with.</h2></div>
+        <a class="btn btn--ghost" href="discover.html">Explore all</a>
+      </div>
+      <div class="grid profiles-grid" id="home-profiles"></div>
+    </div>
+  </section>
+
+  <!-- ===== SMART MATCHING ===== -->
+  <section class="section">
+    <div class="wrap grid cols-2" style="align-items:center;gap:clamp(24px,5vw,64px)">
+      <div data-reveal="left">
+        <p class="eyebrow">Compatibility, not guesswork</p>
+        <h2 class="h2">Smarter matching, <span class="serif-accent grad-text">honestly explained</span>.</h2>
+        <p class="lead">We don't pretend an algorithm can predict love. Instead, TUDO surfaces clear <strong>compatibility insights</strong> so you can decide for yourself.</p>
+        <ul class="stack mt-2">
+          <li class="flex gap-1 items-center"><span class="chip">You both enjoy travelling</span></li>
+          <li class="flex gap-1 items-center"><span class="chip chip--gold">Both looking for a serious relationship</span></li>
+          <li class="flex gap-1 items-center"><span class="chip chip--rose">You share 5 interests</span></li>
+        </ul>
+        <a class="btn btn--primary mt-3" href="register.html" data-magnetic>Get your matches</a>
+      </div>
+      <div data-reveal="scale" class="panel" style="position:relative;overflow:hidden">
+        <div class="jamdani-layer"></div>
+        <div style="position:relative;z-index:1">
+          <div class="flex between items-center mb-2"><strong>Compatibility with Nadia</strong><span class="match-ring">92% Match</span></div>
+          <div class="stack">
+            <div class="glass" style="padding:1rem;display:flex;justify-content:space-between;align-items:center"><span>Relationship intention</span><span class="gold">Aligned</span></div>
+            <div class="glass" style="padding:1rem;display:flex;justify-content:space-between;align-items:center"><span>Shared interests</span><span class="gold">5 in common</span></div>
+            <div class="glass" style="padding:1rem;display:flex;justify-content:space-between;align-items:center"><span>Languages</span><span class="gold">বাংলা · English</span></div>
+            <div class="glass" style="padding:1rem;display:flex;justify-content:space-between;align-items:center"><span>Lifestyle</span><span class="gold">Highly compatible</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GLOBAL COMMUNITY ===== -->
+  <section class="section parallax" id="community">
+    <div class="parallax__bg" data-parallax="0.22" style="background-image:url('assets/images/hero/slide3.jpg')" role="img" aria-label="A couple together, representing the worldwide TUDO community"></div>
+    <div class="parallax__ov"></div>
+    <div class="wrap">
+      <div class="center" style="max-width:640px;margin-inline:auto" data-reveal>
+        <p class="eyebrow" style="justify-content:center">Bangladesh at heart. Global by nature.</p>
+        <h2 class="h2">A <span class="serif-accent grad-text">worldwide</span> Bangladeshi community.</h2>
+        <p class="lead" style="margin-inline:auto">Browse Bangladeshi singles by country and city — from Dhaka and Sylhet to London, Toronto and Dubai.</p>
+      </div>
+      <div class="grid cols-3 mt-4" id="community-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== SAFETY ===== -->
+  <section class="section">
+    <div class="wrap panel" style="position:relative;overflow:hidden" data-reveal>
+      <div class="jamdani-layer"></div>
+      <div class="grid cols-2" style="position:relative;z-index:1;align-items:center;gap:clamp(24px,4vw,54px)">
+        <div>
+          <p class="eyebrow">TUDO Safety Centre</p>
+          <h2 class="h2">Your safety comes <span class="serif-accent grad-text">before the match</span>.</h2>
+          <p class="lead">Verified profiles, private controls and real reporting tools — safety is built in, never behind a paywall.</p>
+          <div class="flex gap-1 wrap-f mt-2">
+            <a class="btn btn--gold" href="safety.html">Visit Safety Centre</a>
+            <a class="btn btn--ghost" href="verification.html">How verification works</a>
+          </div>
+        </div>
+        <div class="grid cols-2" style="gap:1rem">
+          <div class="glass" style="padding:1.3rem"><strong class="gold">Verified profiles</strong><p class="text-sm muted" style="margin:.4rem 0 0">Three levels: email, phone and photo verification.</p></div>
+          <div class="glass" style="padding:1.3rem"><strong class="gold">Private by design</strong><p class="text-sm muted" style="margin:.4rem 0 0">Control who sees your photos, location and status.</p></div>
+          <div class="glass" style="padding:1.3rem"><strong class="gold">Report &amp; block</strong><p class="text-sm muted" style="margin:.4rem 0 0">Free, fast tools whenever something feels off.</p></div>
+          <div class="glass" style="padding:1.3rem"><strong class="gold">Share My Date</strong><p class="text-sm muted" style="margin:.4rem 0 0">Privately share plans with someone you trust.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SUCCESS STORIES ===== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="center" style="max-width:640px;margin-inline:auto" data-reveal>
+        <p class="eyebrow" style="justify-content:center">Success stories</p>
+        <h2 class="h2">Some stories begin with a <span class="serif-accent grad-text">simple hello</span>.</h2>
+      </div>
+    </div>
+    <div class="wrap mt-4"><div class="story-track" id="stories-track"></div></div>
+    <div class="wrap center"><a class="btn btn--ghost mt-2" href="success-stories.html">Read more stories</a></div>
+  </section>
+
+  <!-- ===== PREMIUM ===== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="center" style="max-width:640px;margin-inline:auto" data-reveal>
+        <p class="eyebrow" style="justify-content:center" id="premiumEyebrow">Membership</p>
+        <h2 class="h2" id="premiumHeading">Do more with <span class="serif-accent grad-text">TUDO Premium</span>.</h2>
+        <p class="lead" style="margin-inline:auto" id="premiumSub">Upgrade for unlimited likes, advanced filters and more — while every safety tool stays free, forever.</p>
+      </div>
+      <div id="homeCurrency" style="display:flex;justify-content:center;margin-top:1.4rem"></div>
+      <p class="text-xs muted center" id="homeCurrencyNote" style="margin:.6rem 0 0"></p>
+      <div class="grid price-grid mt-3" id="home-pricing"></div>
+    </div>
+  </section>
+
+  <!-- ===== PWA / APP ===== -->
+  <section class="section section--tight">
+    <div class="wrap panel grid cols-2" style="align-items:center;gap:clamp(24px,4vw,54px)" data-reveal>
+      <div>
+        <p class="eyebrow">TUDO everywhere</p>
+        <h2 class="h2">Take TUDO <span class="serif-accent grad-text">with you</span>.</h2>
+        <p class="lead">Install TUDO as a progressive web app for a fast, native-feeling experience with notifications — no app store required.</p>
+        <div class="flex gap-1 wrap-f mt-2">
+          <button class="btn btn--gold" id="installBtn">Add to Home Screen</button>
+          <a class="btn btn--ghost" href="help.html">Learn more</a>
+        </div>
+      </div>
+      <div class="center"><div style="font-size:clamp(3rem,10vw,6rem)">📱💚</div><p class="muted text-sm">Mobile-first, works offline for browsing your matches.</p></div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section" id="faq">
+    <div class="wrap" style="max-width:820px">
+      <div class="center mb-3" data-reveal><p class="eyebrow" style="justify-content:center">Questions</p><h2 class="h2">Good to know</h2></div>
+      <div id="faq-list" class="stack"></div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL CTA ===== -->
+  <section class="section" style="position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;z-index:0;background:url('assets/images/hero/slide4.jpg') center/cover;opacity:.28"></div>
+    <div style="position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(7,19,15,.7),rgba(7,19,15,.94))"></div>
+    <div class="wrap center" style="position:relative;z-index:1;max-width:760px" data-reveal>
+      <h2 class="display" data-i18n="cta.title">Your Next Chapter Could Start Here.</h2>
+      <p class="lead" style="margin-inline:auto" data-i18n="cta.sub">Join a growing community of Bangladeshi singles looking for genuine connections.</p>
+      <div class="hero__cta" style="justify-content:center;margin-top:1.6rem">
+        <a class="btn btn--primary btn--lg" href="register.html" data-magnetic data-i18n="cta.create">Create Free Profile</a>
+        <a class="btn btn--ghost btn--lg" href="discover.html" data-i18n="cta.explore">Explore TUDO</a>
+      </div>
+    </div>
+  </section>
+
+  <div data-footer></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

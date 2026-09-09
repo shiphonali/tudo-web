@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Your Matches · TUDO</title>
+  <meta name="description" content="See your new matches, favourites and conversations on TUDO." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+  <div data-nav></div>
+  <main class="section section--tight" style="padding-top:calc(var(--nav-h) + 24px)">
+    <div class="wrap">
+      <p class="eyebrow">Your connections</p>
+      <h1 class="h2" style="margin:0 0 1rem">Matches</h1>
+      <div class="flex between items-center wrap-f mb-2">
+        <div class="tabs" id="matchTabs">
+          <button class="tab active" data-tab="new">New Matches</button>
+          <button class="tab" data-tab="recent">Recent</button>
+          <button class="tab" data-tab="await">Awaiting Response</button>
+          <button class="tab" data-tab="fav">Favourites</button>
+          <button class="tab" data-tab="archived">Archived</button>
+        </div>
+        <input class="input" id="matchSearch" placeholder="Search matches…" style="max-width:220px" />
+      </div>
+      <div class="grid profiles-grid" id="matchGrid"></div>
+      <div class="empty" id="matchEmpty" hidden>
+        <div class="empty__icon">✨</div>
+        <h2 class="h3">Nothing here yet.</h2>
+        <p class="muted">Keep discovering — your next match could be a swipe away.</p>
+        <a class="btn btn--primary mt-2" href="discover.html">Discover people</a>
+      </div>
+    </div>
+  </main>
+  <div data-bottomnav></div>
+  <div data-footer></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script>(function(){
+    boot('matches.html'); renderBottomNav('matches.html');
+
+    const byId = id => PROFILES.find(p => p.id === id);
+    const women = PROFILES.filter(p => (p.img || '').includes('women/'));
+    const matched = (store.get('matches', []).map(byId)).filter(Boolean);
+    const seed = matched.length ? matched : women.slice(0, 5); // demo fallback
+    const data = {
+      new: seed.slice(0, 3),
+      recent: seed,
+      await: women.slice(5, 8),
+      fav: store.get('favs', []).map(byId).filter(Boolean),
+      archived: [],
+    };
+    let tab = 'new', q = '';
+    const grid = document.getElementById('matchGrid'), empty = document.getElementById('matchEmpty');
+
+    function card(p) {
+      return `<article class="pcard" data-id="${p.id}">
+        <a class="pcard__img" href="profile.html?id=${p.id}" style="background-image:url('${p.img}');aspect-ratio:3/4">
+          <div class="pcard__top">${p.online ? '<span class="chip">Online</span>' : '<span></span>'}<span class="match-ring">${p.match}%</span></div>
+          <div class="pcard__body"><h3 class="pcard__name" style="font-size:1.25rem">${p.name}, ${p.age}</h3><p class="pcard__meta" style="margin:0">${p.city}</p></div>
+        </a>
+        <div class="flex gap-1" style="padding:.8rem 1rem 1rem">
+          <a class="btn btn--primary btn--sm btn--block" href="messages.html">${ICON.chat} Message</a>
+          <button class="btn btn--ghost btn--icon" data-menu="${p.id}" aria-label="More">⋯</button>
+        </div>
+      </article>`;
+    }
+    function render() {
+      let list = data[tab] || [];
+      if (q) list = list.filter(p => (p.name + p.city + p.country).toLowerCase().includes(q));
+      empty.hidden = !!list.length; grid.hidden = !list.length;
+      grid.innerHTML = list.map(card).join('');
+    }
+    render();
+
+    document.getElementById('matchTabs').addEventListener('click', e => {
+      const b = e.target.closest('.tab'); if (!b) return;
+      document.querySelectorAll('#matchTabs .tab').forEach(t => t.classList.remove('active'));
+      b.classList.add('active'); tab = b.dataset.tab; render();
+    });
+    document.getElementById('matchSearch').addEventListener('input', e => { q = e.target.value.toLowerCase().trim(); render(); });
+
+    grid.addEventListener('click', e => {
+      const m = e.target.closest('[data-menu]'); if (!m) return;
+      const p = byId(m.dataset.menu);
+      modal(`<h3 class="h3">${p.name}</h3><div class="stack mt-2">
+        <button class="btn btn--ghost btn--block" data-x="unmatch">Unmatch</button>
+        <button class="btn btn--ghost btn--block" data-x="archive">Archive</button>
+        <button class="btn btn--ghost btn--block" data-x="block">Block</button>
+        <button class="btn btn--rose btn--block" data-x="report">Report</button></div>`).root
+        .addEventListener('click', ev => {
+          const x = ev.target.closest('[data-x]'); if (!x) return;
+          const msgs = { unmatch: 'Unmatched.', archive: 'Moved to archive.', block: `${p.name} blocked.`, report: 'Thank you. Your report has been received.' };
+          toast(msgs[x.dataset.x], x.dataset.x === 'report' ? 'shield' : 'check');
+          ev.target.closest('.modal-root').querySelector('[data-close]').click();
+        });
+    });
+  
+})();</script>
+</body>
+</html>

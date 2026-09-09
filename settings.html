@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Settings · TUDO</title>
+  <meta name="description" content="Manage your TUDO account, privacy, notifications, security and subscription." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="assets/css/responsive.css" />
+  <style>
+    .settings-layout{display:grid;grid-template-columns:230px 1fr;gap:clamp(18px,3vw,40px);align-items:start}
+    .settings-nav{position:sticky;top:calc(var(--nav-h) + 16px)}
+    .settings-nav button{display:block;width:100%;text-align:left;padding:.7rem 1rem;border-radius:12px;border:0;background:none;color:var(--text-muted);font-weight:600;font-family:var(--font-display);cursor:pointer;transition:all .15s}
+    .settings-nav button.active{background:rgba(24,166,121,.14);color:var(--tudo-green-soft)}
+    .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-bottom:1px solid var(--line);gap:1rem}
+    .switch{position:relative;width:48px;height:28px;flex:none}
+    .switch input{opacity:0;width:0;height:0;position:absolute}
+    .switch span{position:absolute;inset:0;background:rgba(248,246,240,.12);border-radius:999px;transition:.25s;cursor:pointer}
+    .switch span::before{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.25s}
+    .switch input:checked+span{background:linear-gradient(135deg,var(--tudo-green),var(--tudo-emerald))}
+    .switch input:checked+span::before{transform:translateX(20px)}
+    @media(max-width:800px){.settings-layout{grid-template-columns:1fr}.settings-nav{position:static;display:flex;gap:.3rem;overflow-x:auto}.settings-nav button{white-space:nowrap}}
+  </style>
+</head>
+<body>
+  <div data-nav></div>
+  <main class="section section--tight" style="padding-top:calc(var(--nav-h) + 24px)">
+    <div class="wrap">
+      <p class="eyebrow">Account</p>
+      <h1 class="h2" style="margin:0 0 1.4rem">Settings</h1>
+      <div class="settings-layout">
+        <nav class="settings-nav panel" id="settingsNav" aria-label="Settings sections" style="padding:.6rem"></nav>
+        <section id="settingsPanel"></section>
+      </div>
+    </div>
+  </main>
+  <div data-bottomnav></div>
+  <div data-footer></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script>(function(){
+    boot(''); renderBottomNav('settings.html');
+
+    const S = store.get('settings', { online:true, incognito:false, pauseDiscovery:false, hideProfile:false, readReceipts:true, whoPhotos:'matches', notif:{matches:true,likes:true,messages:true,views:true,security:true,sub:true,marketing:false}, twofa:false });
+    const save = () => store.set('settings', S);
+    const tabs = ['Account','Profile','Discovery','Privacy','Notifications','Security','Subscription','Blocked Users','Data & Privacy'];
+    let active = 'Account';
+
+    const nav = document.getElementById('settingsNav');
+    nav.innerHTML = tabs.map(t=>`<button data-t="${t}" class="${t===active?'active':''}">${t}</button>`).join('');
+    nav.addEventListener('click', e=>{ const b=e.target.closest('[data-t]'); if(!b)return; active=b.dataset.t; nav.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b)); render(); });
+
+    const toggle = (label,desc,checked,onChange)=>`<div class="toggle-row"><div><strong>${label}</strong>${desc?`<p class="muted text-sm" style="margin:.2rem 0 0">${desc}</p>`:''}</div><label class="switch"><input type="checkbox" ${checked?'checked':''} data-cb="${onChange}"><span></span></label></div>`;
+
+    function render(){
+      const p = document.getElementById('settingsPanel');
+      let h = '';
+      if(active==='Account') h = `<div class="panel"><h2 class="h3">Account details</h2>
+        <div class="grid cols-2" style="gap:1rem"><div class="field"><label>First name</label><input class="input" value="Aria"/></div><div class="field"><label>Email</label><input class="input" value="you@example.com"/></div></div>
+        <div class="grid cols-2" style="gap:1rem"><div class="field"><label>Mobile</label><input class="input" value="+44 7700 900000"/></div><div class="field"><label>Language</label><select class="select"><option>English</option><option>বাংলা</option></select></div></div>
+        <button class="btn btn--primary" data-save>Save changes</button></div>`;
+      if(active==='Profile') h = `<div class="panel"><h2 class="h3">Edit profile</h2>
+        <div class="field"><label>Bio</label><textarea class="textarea">Designing calm spaces by day, chasing sunsets by weekend.</textarea></div>
+        <div class="grid cols-2" style="gap:1rem"><div class="field"><label>Occupation</label><input class="input" value="Architect"/></div><div class="field"><label>Education</label><select class="select"><option>Postgraduate</option></select></div></div>
+        <button class="btn btn--primary" data-save>Save profile</button></div>`;
+      if(active==='Discovery') h = `<div class="panel"><h2 class="h3">Discovery preferences</h2>
+        ${toggle('Pause discovery','Hide yourself from new people. Existing matches stay.',S.pauseDiscovery,'pauseDiscovery')}
+        ${toggle('Incognito mode','Only people you like can discover your profile. (Premium)',S.incognito,'incognito')}
+        <div class="toggle-row"><div><strong>Age range</strong></div><div style="width:60%"><input class="range" type="range" min="18" max="70" value="38"/></div></div>
+        <div class="toggle-row"><div><strong>Maximum distance</strong></div><div style="width:60%"><input class="range" type="range" min="5" max="500" value="80"/></div></div></div>`;
+      if(active==='Privacy') h = `<div class="panel"><h2 class="h3">Privacy</h2>
+        ${toggle('Show online status','',S.online,'online')}
+        ${toggle('Hide profile temporarily','',S.hideProfile,'hideProfile')}
+        <div class="toggle-row"><div><strong>Who can see my photos</strong></div><select class="select" style="max-width:180px" data-sel="whoPhotos"><option value="everyone" ${S.whoPhotos==='everyone'?'selected':''}>Everyone</option><option value="matches" ${S.whoPhotos==='matches'?'selected':''}>Matches only</option><option value="approved" ${S.whoPhotos==='approved'?'selected':''}>Approved only</option></select></div>
+        <h3 class="h3 mt-2" style="font-size:1.1rem">Photo privacy</h3>
+        <p class="muted text-sm">Each photo can be Public, Blurred, or Matched-only, with a reveal option.</p></div>`;
+      if(active==='Notifications') h = `<div class="panel"><h2 class="h3">Notifications</h2>${
+        [['matches','New matches'],['likes','New likes & Sparks'],['messages','New messages'],['views','Profile views'],['security','Security alerts'],['sub','Subscription updates'],['marketing','Marketing & tips']]
+        .map(([k,l])=>toggle(l,'',S.notif[k],'notif.'+k)).join('')}</div>`;
+      if(active==='Security') h = `<div class="panel"><h2 class="h3">Security</h2>
+        <div class="grid cols-2" style="gap:1rem"><div class="field"><label>New password</label><input class="input" type="password" placeholder="••••••••"/></div><div class="field"><label>Confirm</label><input class="input" type="password" placeholder="••••••••"/></div></div>
+        <button class="btn btn--ghost mb-2" data-save>Change password</button>
+        ${toggle('Two-factor authentication','Add a second step at login for extra protection.',S.twofa,'twofa')}
+        <h3 class="h3 mt-2" style="font-size:1.1rem">Active sessions</h3>
+        <div class="toggle-row"><div><strong>London, UK · Chrome</strong><p class="muted text-sm" style="margin:0">This device · active now</p></div><span class="chip">Current</span></div>
+        <div class="toggle-row"><div><strong>Dhaka, BD · Safari</strong><p class="muted text-sm" style="margin:0">2 days ago</p></div><button class="btn btn--ghost btn--sm" data-toast="Session signed out.">Sign out</button></div>
+        <button class="btn btn--rose mt-2" data-toast="Signed out of all other devices.">Log out all devices</button></div>`;
+      if(active==='Subscription') h = `<div class="panel"><h2 class="h3">Subscription</h2>
+        <div class="glass flex between items-center" style="padding:1rem"><div><strong>${store.get('plan','TUDO Free')}</strong><p class="muted text-sm" style="margin:0">${store.get('plan')?'Renews monthly':'No active subscription'}</p></div><a class="btn btn--gold btn--sm" href="premium.html">${store.get('plan')?'Manage':'Upgrade'}</a></div>
+        <h3 class="h3 mt-2" style="font-size:1.1rem">Payment method</h3><p class="muted text-sm">No card stored. Payments run through certified providers (Stripe, Apple Pay, bKash, Nagad).</p></div>`;
+      if(active==='Blocked Users') h = `<div class="panel"><h2 class="h3">Blocked users</h2>${
+        (store.get('blocked',[]).length? store.get('blocked',[]).map(id=>`<div class="toggle-row"><div><strong>Blocked profile ${id}</strong></div><button class="btn btn--ghost btn--sm" data-toast="Unblocked.">Unblock</button></div>`).join('') : '<p class="muted">You haven\'t blocked anyone. Blocked users can never contact you.</p>')}</div>`;
+      if(active==='Data & Privacy') h = `<div class="panel"><h2 class="h3">Data &amp; privacy</h2>
+        <div class="toggle-row"><div><strong>Download your data</strong><p class="muted text-sm" style="margin:0">Get a copy of your TUDO information.</p></div><button class="btn btn--ghost btn--sm" data-toast="We'll email your data export shortly.">Request</button></div>
+        <div class="toggle-row"><div><strong>Deactivate account</strong><p class="muted text-sm" style="margin:0">Temporarily hide your profile. Reactivate anytime by logging in.</p></div><button class="btn btn--ghost btn--sm" id="deactivate">Deactivate</button></div>
+        <div class="toggle-row"><div><strong style="color:var(--tudo-rose-soft)">Delete account</strong><p class="muted text-sm" style="margin:0">Permanently delete your profile, matches and messages.</p></div><button class="btn btn--rose btn--sm" id="deleteAcc">Delete</button></div></div>`;
+      p.innerHTML = h;
+    }
+    render();
+
+    document.getElementById('settingsPanel').addEventListener('change', e=>{
+      const cb=e.target.closest('[data-cb]'); if(cb){ const key=cb.dataset.cb; if(key.startsWith('notif.')) S.notif[key.split('.')[1]]=cb.checked; else S[key]=cb.checked; save(); toast('Preference saved.','check'); }
+      const sel=e.target.closest('[data-sel]'); if(sel){ S[sel.dataset.sel]=sel.value; save(); toast('Saved.','check'); }
+    });
+    document.getElementById('settingsPanel').addEventListener('click', e=>{
+      if(e.target.closest('[data-save]')) toast('Changes saved.','check');
+      const t=e.target.closest('[data-toast]'); if(t) toast(t.dataset.toast,'shield');
+      if(e.target.id==='deactivate') modal(`<h3 class="h3">Deactivate account?</h3><p class="muted">Your profile will be hidden. You can reactivate anytime by logging back in. Nothing is deleted.</p><div class="flex gap-1 mt-2"><button class="btn btn--ghost btn--block" data-close>Cancel</button><button class="btn btn--gold btn--block" id="doDeact">Deactivate</button></div>`),
+        setTimeout(()=>document.getElementById('doDeact')&&(document.getElementById('doDeact').onclick=(ev)=>{ev.target.closest('.modal-root').querySelector('[data-close]').click();toast('Account deactivated. Log in to reactivate.','shield');}),50);
+      if(e.target.id==='deleteAcc'){ const {root}=modal(`<h3 class="h3" style="color:var(--tudo-rose-soft)">Delete your account</h3><p class="muted">This permanently removes your profile, matches, messages and photos. This cannot be undone.</p><p class="text-sm">Type <strong>DELETE</strong> to confirm.</p><input class="input" id="delConfirm" placeholder="DELETE"/><div class="flex gap-1 mt-2"><button class="btn btn--ghost btn--block" data-close>Keep my account</button><button class="btn btn--rose btn--block" id="doDel" disabled>Delete forever</button></div>`);
+        root.addEventListener('input', ()=>{ const ok=root.querySelector('#delConfirm').value==='DELETE'; root.querySelector('#doDel').disabled=!ok; });
+        root.querySelector('#doDel').onclick=()=>{ root.querySelector('[data-close]').click(); toast('Account scheduled for deletion (demo).','shield'); };
+      }
+    });
+  
+})();</script>
+</body>
+</html>

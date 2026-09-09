@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Favourites · TUDO</title>
+  <meta name="description" content="Profiles you've saved as favourites on TUDO." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+  <div data-nav></div>
+  <main class="section section--tight" style="padding-top:calc(var(--nav-h) + 24px)">
+    <div class="wrap">
+      <p class="eyebrow">Saved for later</p>
+      <h1 class="h2" style="margin:0 0 1rem">Your favourites</h1>
+      <div class="grid profiles-grid" id="favGrid"></div>
+      <div class="empty" id="favEmpty" hidden><div class="empty__icon">⭐</div><h2 class="h3">No favourites yet.</h2><p class="muted">Tap the star on any profile to save it here.</p><a class="btn btn--primary mt-2" href="discover.html">Discover people</a></div>
+    </div>
+  </main>
+  <div data-bottomnav></div>
+  <div data-footer></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script>(function(){
+    boot('favourites.html'); renderBottomNav('');
+    let ids = store.get('favs', []);
+    let favs = ids.map(id=>PROFILES.find(p=>p.id===id)).filter(Boolean);
+    if(!favs.length) favs = PROFILES.slice(0,4); // demo seed
+    const grid = document.getElementById('favGrid'), empty=document.getElementById('favEmpty');
+    empty.hidden = !!favs.length; grid.hidden = !favs.length;
+    grid.innerHTML = favs.map(p=>profileCard(p,{compact:true})).join('');
+    grid.querySelectorAll('[data-reveal]').forEach(e=>e.classList.add('in'));
+    grid.addEventListener('click', e=>{ const b=e.target.closest('[data-act]'); if(!b) return; e.preventDefault(); toast(b.dataset.act==='like'?'Liked!':b.dataset.act==='spark'?'Spark sent ✨':'Updated.', 'heart'); });
+  
+})();</script>
+</body>
+</html>

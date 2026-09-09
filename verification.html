@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Get Verified · TUDO</title>
+  <meta name="description" content="Verify your TUDO profile across three levels — email, phone and photo — to build trust." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+  <div data-nav></div>
+  <main class="section section--tight" style="padding-top:calc(var(--nav-h) + 24px)">
+    <div class="wrap" style="max-width:760px">
+      <p class="eyebrow">Trust &amp; verification</p>
+      <h1 class="h2" style="margin:0 0 .4rem">Get verified</h1>
+      <p class="muted mb-3">Each level adds a trust badge. Verification improves confidence but is <strong>not a guarantee</strong> another person is safe or truthful.</p>
+
+      <div class="stack" id="levels"></div>
+
+      <div class="panel mt-3" data-reveal>
+        <div class="flex gap-1 items-center"><span style="font-size:1.6rem">🏅</span><div><strong>Your current level: <span id="curLevel" class="gold">Level 1 — Email</span></strong><p class="muted text-sm" style="margin:0">Complete more steps to raise your trust score.</p></div></div>
+      </div>
+    </div>
+  </main>
+  <div data-footer></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script>(function(){
+    boot('');
+    const state = { email:true, phone:false, photo:false };
+    const levels = [
+      { k:'email', n:'Level 1 — Email verified', d:'Confirm your email address.', cta:'Verified' },
+      { k:'phone', n:'Level 2 — Phone verified', d:'Verify your mobile via a one-time code.', cta:'Verify phone' },
+      { k:'photo', n:'Level 3 — Photo / selfie verified', d:'Take a live selfie matched to your photos.', cta:'Start selfie check' },
+    ];
+    const host = document.getElementById('levels');
+    function draw(){
+      host.innerHTML = levels.map((l,i)=>`
+        <div class="panel flex between items-center gap-1" data-reveal>
+          <div class="flex gap-1 items-center"><span class="act" style="width:46px;height:46px;flex:none;${state[l.k]?'border-color:var(--tudo-green);background:rgba(24,166,121,.14)':''}">${state[l.k]?ICON.check:ICON.shield}</span>
+          <div><strong>${l.n}</strong><p class="muted text-sm" style="margin:0">${l.d}</p></div></div>
+          ${state[l.k]?'<span class="badge-verify">'+ICON.verify+'Verified</span>':`<button class="btn btn--primary btn--sm" data-v="${l.k}">${l.cta}</button>`}
+        </div>`).join('');
+      host.querySelectorAll('[data-reveal]').forEach(e=>e.classList.add('in'));
+      const top = state.photo?'Level 3 — Photo':state.phone?'Level 2 — Phone':'Level 1 — Email';
+      document.getElementById('curLevel').textContent = top;
+    }
+    draw();
+    host.addEventListener('click', e=>{
+      const b=e.target.closest('[data-v]'); if(!b) return;
+      const k=b.dataset.v;
+      if(k==='phone'){ const {close}=modal(`<h3 class="h3">Verify your phone</h3><p class="muted text-sm">We sent a code to your number (demo: 4821).</p><div class="field mt-2"><input class="input" placeholder="Enter code" inputmode="numeric"/></div><button class="btn btn--primary btn--block" id="vok">Verify</button>`); document.getElementById('vok').onclick=()=>{close();state.phone=true;draw();toast('Phone verified! Level 2 unlocked.','check');}; }
+      if(k==='photo'){ const {close}=modal(`<h3 class="h3">Photo verification</h3><p class="muted text-sm">Position your face in the frame and match the pose. (Demo)</p><div class="glass" style="aspect-ratio:1;display:grid;place-items:center;margin:1rem 0;border:2px dashed var(--line-strong)"><span style="font-size:3rem">🤳</span></div><button class="btn btn--primary btn--block" id="vok2">Capture selfie</button>`); document.getElementById('vok2').onclick=()=>{close();state.photo=true;draw();toast('Selfie submitted — reviewed within 24h (demo: approved).','check');}; }
+    });
+  
+})();</script>
+</body>
+</html>

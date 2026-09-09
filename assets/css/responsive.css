@@ -1,0 +1,88 @@
+/* ============================================================
+   TUDO — responsive refinements & breakpoints
+   320 / 375 / 430 / 768 / 1024 / 1280 / 1440 / 1920+
+   ============================================================ */
+
+/* Large displays / TV */
+@media (min-width: 1600px) {
+  :root { --maxw: 1440px; }
+  html { font-size: 17px; }
+}
+@media (min-width: 1920px) {
+  :root { --maxw: 1560px; }
+  html { font-size: 18px; }
+}
+
+/* Laptop */
+@media (max-width: 1280px) {
+  :root { --gutter: clamp(18px, 4vw, 44px); }
+}
+
+/* Tablet landscape / small laptop */
+@media (max-width: 1024px) {
+  .auth { grid-template-columns: 1fr; }
+}
+
+/* Tablet portrait */
+@media (max-width: 768px) {
+  :root { --nav-h: 66px; }
+  .section { padding: clamp(52px, 10vw, 84px) 0; }
+  .quick-search { margin-top: -40px; }
+  .qs__grid { grid-template-columns: 1fr 1fr; }
+  .hero__title { font-size: clamp(2.4rem, 9vw, 3.6rem); }
+  .hiw__item { grid-template-columns: 1fr; gap: .5rem; }
+  .footer__bottom { justify-content: center; text-align: center; }
+  /* Show bottom nav on app-like pages */
+  body.app .bottom-nav { display: block; }
+  body.app { padding-bottom: 72px; }
+}
+
+/* Large phone (430) */
+@media (max-width: 480px) {
+  html { font-size: 15.5px; }
+  .btn { padding: .86rem 1.25rem; }
+  .hero__cta { width: 100%; }
+  .hero__cta .btn { flex: 1; }
+  .qs__grid { grid-template-columns: 1fr; }
+  .modal { width: 100%; }
+  .pcard__actions { gap: .45rem; }
+  .act { width: 50px; height: 50px; }
+  .act--like { width: 60px; height: 60px; }
+  .story { flex-basis: 88vw; }
+}
+
+/* Small phone (375 / 360) */
+@media (max-width: 380px) {
+  html { font-size: 15px; }
+  .logo { font-size: 1.16rem; }
+  .nav__right .btn span.long { display: none; }
+}
+
+/* Very small (320) */
+@media (max-width: 340px) {
+  :root { --gutter: 14px; }
+  .stat__num { font-size: 2rem; }
+}
+
+/* Landscape phones */
+@media (max-height: 520px) and (orientation: landscape) {
+  .hero { min-height: 620px; }
+}
+
+/* Reduced motion — flatten hero/particle drama */
+@media (prefers-reduced-motion: reduce) {
+  .slide__bg { transform: none !important; }
+  #tudo-particles { display: none; }
+  .rotator__word.in, .rotator__word.out { animation: none; }
+  .rotator__word:not(.in) { opacity: 0; }
+  .rotator__word.in { opacity: 1; transform: none; }
+  .hero__title .line > span { transform: none; animation: none; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+}
+
+/* Print — keep it readable */
+@media print {
+  .nav, .bottom-nav, #tudo-particles, .hero__controls, .footer { display: none !important; }
+  body { background: #fff; color: #000; }
+  body::before, body::after { display: none; }
+}

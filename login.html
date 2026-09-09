@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Log In · TUDO</title>
+  <meta name="description" content="Log in to TUDO to continue meeting Bangladeshi singles worldwide." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+  <div class="auth">
+    <aside class="auth__aside">
+      <div class="aside-bg" style="background-image:url('assets/images/hero/slide1.jpg')"></div>
+      <div class="aside-ov"></div>
+      <a class="logo" href="index.html"><span class="logo__mark"></span>TU<b>DO</b></a>
+      <div>
+        <p class="eyebrow">Welcome back</p>
+        <h1 class="display" style="font-size:clamp(2rem,4vw,3.4rem)">Good to see you <span class="serif-accent grad-text">again</span>.</h1>
+        <p class="lead">Your conversations, matches and Sparks are right where you left them.</p>
+        <p class="serif-accent gold bn" style="margin-top:1rem">মন থেকে মন — বাংলাদেশ থেকে বিশ্বজুড়ে।</p>
+      </div>
+      <p class="text-xs muted">Demo build. No real accounts are created.</p>
+    </aside>
+
+    <main class="auth__main">
+      <div class="auth__card">
+        <a class="logo mobile-only mb-3" href="index.html" style="justify-content:center"><span class="logo__mark"></span>TU<b>DO</b></a>
+        <h2 class="h2" style="font-size:1.9rem">Log in to TUDO</h2>
+        <p class="muted mb-3">New here? <a href="register.html" class="gold" style="text-decoration:underline">Create a free account</a>.</p>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="lemail">Email</label>
+            <input class="input" id="lemail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="lpass">Password</label>
+            <div class="rel">
+              <input class="input" id="lpass" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required style="padding-right:3rem" />
+              <button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--tudo-muted);padding:.5rem">👁</button>
+            </div>
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <div class="flex between items-center mb-2">
+            <label class="check text-sm"><input type="checkbox" name="remember" checked /> Remember me</label>
+            <a href="#" class="text-sm gold" style="text-decoration:underline">Forgot password?</a>
+          </div>
+          <button class="btn btn--primary btn--block btn--lg" type="submit" data-magnetic>Log In</button>
+        </form>
+
+        <div class="flex items-center gap-1 mt-3 mb-2"><span class="divider" style="flex:1"></span><span class="text-xs muted">or continue with</span><span class="divider" style="flex:1"></span></div>
+        <div class="flex gap-1">
+          <button class="btn btn--ghost btn--block" onclick="return false">Google</button>
+          <button class="btn btn--ghost btn--block" onclick="return false">Apple</button>
+        </div>
+        <p class="text-xs muted mt-3">By continuing you agree to our <a href="terms.html" class="gold">Terms</a> and <a href="privacy.html" class="gold">Privacy Policy</a>.</p>
+        <p class="mt-2"><a href="index.html" class="text-sm muted">← Back to home</a></p>
+      </div>
+    </main>
+  </div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>

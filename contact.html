@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Contact TUDO</title>
+  <meta name="description" content="Get in touch with the TUDO team — support, press, partnerships and feedback." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+  <div data-nav></div>
+  <main class="section section--tight" style="padding-top:calc(var(--nav-h) + 30px)">
+    <div class="wrap grid cols-2" style="gap:1.6rem;align-items:start">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h1 class="h2" style="margin:0 0 .6rem">We'd love to hear from you.</h1>
+        <p class="lead">Questions, feedback or press — send a note and our team will get back to you.</p>
+        <div class="stack mt-3">
+          <div class="glass flex gap-1 items-center" style="padding:1rem"><span style="font-size:1.4rem">📞</span><div><strong>Tudo Devloy · Call us</strong><div class="text-sm"><a href="tel:+447944497722" class="gold" style="font-weight:600">07944 497722</a></div></div></div>
+          <div class="glass flex gap-1 items-center" style="padding:1rem"><span style="font-size:1.4rem">✉️</span><div><strong>Support</strong><div class="muted text-sm">hello@tudo.example</div></div></div>
+          <div class="glass flex gap-1 items-center" style="padding:1rem"><span style="font-size:1.4rem">🗞️</span><div><strong>Press</strong><div class="muted text-sm">press@tudo.example</div></div></div>
+          <div class="glass flex gap-1 items-center" style="padding:1rem"><span style="font-size:1.4rem">🛡️</span><div><strong>Safety concerns</strong><div class="muted text-sm">safety@tudo.example · reviewed urgently</div></div></div>
+        </div>
+      </div>
+      <form class="panel" id="contactForm">
+        <div class="field"><label>Name</label><input class="input" name="name" required placeholder="Your name"/><span class="error-msg"></span></div>
+        <div class="field"><label>Email</label><input class="input" name="email" type="email" required placeholder="you@example.com"/><span class="error-msg"></span></div>
+        <div class="field"><label>Subject</label><input class="input" name="subject" placeholder="How can we help?"/></div>
+        <div class="field"><label>Message</label><textarea class="textarea" name="message" required placeholder="Tell us more…"></textarea><span class="error-msg"></span></div>
+        <button class="btn btn--primary btn--block" data-magnetic>Send message</button>
+      </form>
+    </div>
+  </main>
+  <div data-footer></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script>(function(){
+    boot('');
+    document.getElementById('contactForm').addEventListener('submit', e=>{
+      e.preventDefault(); const f=e.target;
+      let ok=true;
+      [...f.querySelectorAll('[required]')].forEach(x=>{ const w=x.closest('.field'); const bad=!x.value.trim()||(x.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x.value)); w.classList.toggle('field--error',bad); const em=w.querySelector('.error-msg'); if(em) em.textContent=bad?'Please check this field.':''; if(bad) ok=false; });
+      if(!ok) return; f.reset(); toast('Thanks! We\'ll be in touch soon.','check');
+    });
+  
+})();</script>
+</body>
+</html>

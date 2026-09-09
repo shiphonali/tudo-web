@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>TUDO Premium & Elite · Membership Plans</title>
+  <meta name="description" content="Upgrade to TUDO Premium or Elite for unlimited likes, advanced filters, Incognito, Boost and Travel Mode. Safety tools are always free." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+  <div data-nav></div>
+  <main style="padding-top:calc(var(--nav-h) + 40px)">
+    <section class="section section--tight">
+      <div class="wrap center" style="max-width:720px">
+        <p class="eyebrow" style="justify-content:center">Membership</p>
+        <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">Love the way you want, <span class="serif-accent grad-text">faster</span>.</h1>
+        <p class="lead" style="margin-inline:auto">Choose the plan that fits how you date. Every safety tool — blocking, reporting, verification — is free, forever.</p>
+        <div class="flex gap-2 wrap-f mt-2" style="justify-content:center;align-items:center">
+          <div class="lang" style="display:inline-flex" role="group" aria-label="Billing period">
+            <button class="active" id="billMonthly">Monthly</button><button id="billYearly">Yearly · save 30%</button>
+          </div>
+          <div id="premCurrency"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap grid price-grid" id="planGrid"></div>
+      <div class="wrap center mt-3"><p class="text-xs muted" id="premCurrencyNote">Prices for illustration. Never place safety tools behind a paywall.</p></div>
+    </section>
+
+    <!-- Feature comparison -->
+    <section class="section section--tight">
+      <div class="wrap">
+        <h2 class="h2 center mb-3">Compare features</h2>
+        <div class="panel" style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;min-width:560px">
+            <thead><tr style="text-align:left"><th style="padding:.8rem">Feature</th><th class="center">Free</th><th class="center gold">Premium</th><th class="center">Elite</th></tr></thead>
+            <tbody id="compareBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Boost + Travel -->
+    <section class="section" style="padding-top:0">
+      <div class="wrap grid cols-2" style="gap:1.4rem">
+        <div class="card card--hover" data-reveal>
+          <div class="card__num">🚀</div>
+          <h3 class="h3">Boost My Profile</h3>
+          <p class="muted">Temporarily increase your profile visibility so more people see you first.</p>
+          <button class="btn btn--gold mt-1" id="boostBtn">Boost for 30 min</button>
+        </div>
+        <div class="card card--hover" data-reveal data-reveal-delay="1">
+          <div class="card__num">🧭</div>
+          <h3 class="h3">Travel Mode</h3>
+          <p class="muted">Exploring another city? Preview matches in London, Dhaka, Sylhet, Toronto and more. Clearly labelled — we never fake your real location.</p>
+          <div class="flex gap-1 mt-1"><select class="select" id="travelCity" style="max-width:200px"><option>London</option><option>Dhaka</option><option>Sylhet</option><option>Manchester</option><option>Toronto</option><option>New York</option></select><button class="btn btn--ghost" id="travelBtn">Enable</button></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div data-footer></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script>(function(){
+    boot('premium.html');
+    const c = ICON.check, x = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6E827A" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    let yearly = false;
+    const priceHTML = (amt) => {
+      const cur = currencyList()[activeCurrency()];
+      if (!amt) return money(cur, 0) + ' <small>/ forever</small>';
+      return yearly ? money(cur, amt*12*0.7) + ' <small>/ year</small>' : money(cur, amt) + ' <small>/ month</small>';
+    };
+    const plans = [
+      { name:'TUDO Free', chip:'chip--muted', tier:'free', cta:['Start free','btn--ghost','register.html'], feats:['Create your profile','Basic discovery & matching','Limited daily likes','Basic chat','All safety tools','Block & report'] },
+      { name:'TUDO Premium', chip:'', featured:true, tier:'premium', cta:['Go Premium','btn--primary','#'], feats:['Everything in Free','Unlimited likes & more Sparks','See who liked you','Advanced filters','Undo pass','Incognito mode','Profile boost','Configurable read receipts'] },
+      { name:'TUDO Elite', chip:'chip--gold', tier:'elite', cta:['Explore Elite','btn--gold','#'], feats:['Everything in Premium','Priority discovery','Premium profile styling','Monthly boosts','Travel Mode','Advanced compatibility insights','Exclusive filters'] },
+    ];
+    const grid = document.getElementById('planGrid');
+    function renderPlans(){
+      const cur = currencyList()[activeCurrency()];
+      const amt = { free:0, premium:cur.premium, elite:cur.elite };
+      const note = document.getElementById('premCurrencyNote');
+      if (note) note.textContent = `Prices in ${cur.code} (${cur.symbol}) for Bangladeshis in ${cur.who}. Safety tools are always free. Demo — no real payment is taken.`;
+      grid.innerHTML = plans.map((p,i)=>`
+        <div class="card price ${p.featured?'price--featured':''}" data-reveal data-reveal-delay="${i}">
+          <div class="chip ${p.chip} mb-1">${p.featured?'Most popular · ':''}${p.name}</div>
+          <div class="price__amt">${priceHTML(amt[p.tier])}</div>
+          <ul>${p.feats.map(f=>`<li>${c}${f}</li>`).join('')}</ul>
+          <button class="btn ${p.cta[1]} btn--block" data-plan="${p.name}" data-href="${p.cta[2]}">${p.cta[0]}</button>
+        </div>`).join('');
+      grid.querySelectorAll('[data-reveal]').forEach(e=>e.classList.add('in'));
+    }
+    renderPlans();
+    mountCurrency('premCurrency', renderPlans);
+    document.getElementById('billMonthly').onclick=(e)=>{yearly=false;toggle(e);renderPlans();};
+    document.getElementById('billYearly').onclick=(e)=>{yearly=true;toggle(e);renderPlans();};
+    function toggle(e){document.querySelectorAll('#billMonthly,#billYearly').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');}
+
+    grid.addEventListener('click', e=>{
+      const b=e.target.closest('[data-plan]'); if(!b) return;
+      if(b.dataset.href!=='#'){ location.href=b.dataset.href; return; }
+      checkout(b.dataset.plan);
+    });
+
+    function checkout(plan){
+      const { close } = modal(`<h3 class="h3">Upgrade to ${plan}</h3>
+        <p class="muted text-sm">Payments are processed by certified providers. TUDO never stores your card details.</p>
+        <div class="flex gap-1 wrap-f mt-2">
+          <button class="btn btn--ghost btn--sm">💳 Card</button><button class="btn btn--ghost btn--sm"> Apple Pay</button>
+          <button class="btn btn--ghost btn--sm">G Pay</button><button class="btn btn--ghost btn--sm">bKash</button><button class="btn btn--ghost btn--sm">Nagad</button>
+        </div>
+        <div class="field mt-2"><label>Card number</label><input class="input" placeholder="•••• •••• •••• ••••" inputmode="numeric" disabled/></div>
+        <p class="text-xs muted">Demo — no real payment is taken. In production this opens Stripe/provider checkout.</p>
+        <button class="btn btn--primary btn--block mt-1" id="payGo">Continue to secure checkout</button>`, { wide:false });
+      document.getElementById('payGo').onclick=()=>{ close(); store.set('plan', plan); toast(`Welcome to ${plan}! (demo)`, 'star'); };
+    }
+
+    // comparison table
+    const rows = [
+      ['Daily likes','Limited','Unlimited','Unlimited'],
+      ['See who liked you','no','yes','yes'],
+      ['Advanced filters','no','yes','yes'],
+      ['Incognito mode','no','yes','yes'],
+      ['Undo pass','no','yes','yes'],
+      ['Profile boost','no','1 / month','Monthly'],
+      ['Travel Mode','no','no','yes'],
+      ['Priority discovery','no','no','yes'],
+      ['Safety & reporting tools','yes','yes','yes'],
+    ];
+    document.getElementById('compareBody').innerHTML = rows.map(r=>`<tr style="border-top:1px solid var(--line)">
+      <td style="padding:.7rem">${r[0]}</td>
+      ${r.slice(1).map(v=>`<td class="center" style="padding:.7rem">${v==='yes'?c:v==='no'?x:`<span class="text-sm">${v}</span>`}</td>`).join('')}</tr>`).join('');
+
+    // boost / travel
+    document.getElementById('boostBtn').onclick=()=>{
+      const btn=document.getElementById('boostBtn'); let s=1800; btn.disabled=true;
+      const tick=()=>{ if(s<=0){btn.disabled=false;btn.textContent='Boost for 30 min';toast('Boost finished.','check');return;} const m=String(Math.floor(s/60)).padStart(2,'0'),sec=String(s%60).padStart(2,'0'); btn.textContent=`Boosting… ${m}:${sec}`; s-=1; setTimeout(tick,1000); };
+      toast('You\'re boosted! You\'re now near the top of discovery.','star'); tick();
+    };
+    document.getElementById('travelBtn').onclick=()=>{ const city=document.getElementById('travelCity').value; store.set('travel',city); toast(`Travel Mode on — exploring ${city}. Clearly labelled on your profile.`,'globe'); };
+  
+})();</script>
+</body>
+</html>

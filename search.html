@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Advanced Search · TUDO</title>
+  <meta name="description" content="Filter Bangladeshi singles by age, location, interests, lifestyle and more on TUDO." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="assets/css/responsive.css" />
+  <style>
+    .search-layout{display:grid;grid-template-columns:300px 1fr;gap:clamp(18px,3vw,40px);align-items:start}
+    .filters{position:sticky;top:calc(var(--nav-h) + 16px);max-height:calc(100svh - var(--nav-h) - 32px);overflow-y:auto}
+    @media(max-width:900px){.search-layout{grid-template-columns:1fr}.filters{position:fixed;inset:0;z-index:150;top:0;max-height:100svh;transform:translateX(-100%);transition:transform .4s var(--e-out);border-radius:0}.filters.open{transform:none}}
+    .facc summary{cursor:pointer;list-style:none;font-weight:700;font-family:var(--font-display);padding:.7rem 0;display:flex;justify-content:space-between;border-bottom:1px solid var(--line)}
+    .facc summary::-webkit-details-marker{display:none}
+    .facc[open] summary .gold{transform:rotate(45deg)}
+  </style>
+</head>
+<body>
+  <div data-nav></div>
+  <main class="section section--tight" style="padding-top:calc(var(--nav-h) + 20px)">
+    <div class="wrap">
+      <div class="flex between items-center wrap-f mb-2">
+        <div><p class="eyebrow">Advanced search</p><h1 class="h2" style="margin:0">Find exactly who you're looking for</h1></div>
+        <button class="btn btn--ghost btn--sm mobile-only" id="openFilters">⚙ Filters</button>
+      </div>
+      <div class="search-layout">
+        <aside class="filters panel" id="filters" aria-label="Filters">
+          <div class="flex between items-center mb-1">
+            <strong>Filters</strong>
+            <button class="btn btn--icon btn--ghost mobile-only" id="closeFilters" aria-label="Close">✕</button>
+          </div>
+          <form id="filterForm">
+            <details class="facc" open><summary>Basics <span class="gold">+</span></summary>
+              <div class="stack" style="padding:.8rem 0">
+                <div class="field" style="margin:0"><label>Age range: <span id="ageOut" class="gold">24–38</span></label>
+                  <div class="flex gap-1"><input class="range" type="range" name="ageMin" min="18" max="70" value="24"/><input class="range" type="range" name="ageMax" min="18" max="70" value="38"/></div></div>
+                <div class="field" style="margin:0"><label>Country</label><select class="select" name="country"><option value="">Anywhere</option><option>Bangladesh</option><option>United Kingdom</option><option>United States</option><option>Canada</option><option>Australia</option><option>UAE</option></select></div>
+                <div class="field" style="margin:0"><label>Bangladesh district/division</label><select class="select" name="division"><option value="">Any</option><option>Dhaka</option><option>Sylhet</option><option>Chattogram</option><option>Rajshahi</option><option>Khulna</option><option>Barishal</option></select></div>
+                <div class="field" style="margin:0"><label>Relationship goal</label><select class="select" name="goal"><option value="">Any</option><option>Serious Relationship</option><option>Marriage</option><option>Dating</option><option>Friendship</option><option>Open to Exploring</option></select></div>
+              </div></details>
+            <details class="facc"><summary>Profile <span class="gold">+</span></summary>
+              <div class="stack" style="padding:.8rem 0">
+                <label class="check"><input type="checkbox" name="verified"/> Verified only</label>
+                <label class="check"><input type="checkbox" name="online"/> Online now</label>
+                <label class="check"><input type="checkbox" name="recent"/> Recently active</label>
+                <label class="check"><input type="checkbox" name="photos" checked/> Has photos</label>
+                <label class="check"><input type="checkbox" name="newm"/> New members</label>
+              </div></details>
+            <details class="facc"><summary>Education <span class="gold">+</span></summary>
+              <div class="stack" style="padding:.8rem 0">
+                <select class="select" name="edu"><option value="">Any education</option><option>Secondary</option><option>College</option><option>Undergraduate</option><option>Graduate</option><option>Postgraduate</option><option>Doctorate</option></select>
+              </div></details>
+            <details class="facc"><summary>Languages <span class="gold">+</span></summary>
+              <div class="pill-group" style="padding:.8rem 0">
+                ${['বাংলা','English','Sylheti','Chittagonian','Others'].map(l=>`<label class="pill-opt"><input type="checkbox" name="lang" value="${l}"/><span>${l}</span></label>`).join('')}
+              </div></details>
+            <details class="facc"><summary>Lifestyle <span class="gold">+</span></summary>
+              <div class="stack" style="padding:.8rem 0">
+                <div class="field" style="margin:0"><label>Smoking</label><select class="select" name="smoke"><option value="">Any</option><option>Non-smoker</option><option>Occasionally</option></select></div>
+                <div class="field" style="margin:0"><label>Drinking</label><select class="select" name="drink"><option value="">Any</option><option>Never</option><option>Socially</option></select></div>
+                <div class="field" style="margin:0"><label>Fitness</label><select class="select" name="fit"><option value="">Any</option><option>Active</option><option>Very active</option></select></div>
+              </div></details>
+            <details class="facc"><summary>Interests <span class="gold">+</span></summary>
+              <div class="pill-group" id="interestFilter" style="padding:.8rem 0"></div></details>
+            <div class="flex gap-1 mt-2">
+              <button type="button" class="btn btn--ghost btn--block" id="resetFilters">Reset</button>
+              <button type="button" class="btn btn--gold btn--block" id="saveFilters">Save</button>
+            </div>
+            <button type="submit" class="btn btn--primary btn--block mt-1">Apply filters</button>
+          </form>
+        </aside>
+
+        <section>
+          <div class="flex between items-center mb-2">
+            <p class="muted text-sm" id="resultCount">—</p>
+            <select class="select" id="sortBy" style="max-width:200px"><option value="match">Sort: Best match</option><option value="age">Youngest first</option><option value="online">Online first</option></select>
+          </div>
+          <div class="grid profiles-grid" id="searchResults"></div>
+          <div class="empty" id="searchEmpty" hidden><div class="empty__icon">🔍</div><h2 class="h3">No one matches those filters.</h2><p class="muted">Try widening your search.</p></div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <div data-footer></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script>(function(){
+    boot('');
+
+    document.getElementById('interestFilter').innerHTML = INTERESTS.map(i=>`<label class="pill-opt"><input type="checkbox" name="interest" value="${i}"/><span>${i}</span></label>`).join('');
+
+    const form = document.getElementById('filterForm');
+    const results = document.getElementById('searchResults');
+    const empty = document.getElementById('searchEmpty');
+    const count = document.getElementById('resultCount');
+    const ageMin = form.ageMin, ageMax = form.ageMax, ageOut = document.getElementById('ageOut');
+    const syncAge = () => { if(+ageMin.value>+ageMax.value){const t=ageMin.value;ageMin.value=ageMax.value;ageMax.value=t;} ageOut.textContent = `${ageMin.value}–${ageMax.value}`; };
+    ageMin.addEventListener('input',syncAge); ageMax.addEventListener('input',syncAge);
+
+    function apply() {
+      const fd = new FormData(form);
+      const langs = fd.getAll('lang'), ints = fd.getAll('interest');
+      let list = PROFILES.filter(p => {
+        if (p.age < +ageMin.value || p.age > +ageMax.value) return false;
+        if (fd.get('country') && p.country !== fd.get('country')) return false;
+        if (fd.get('division') && p.origin !== fd.get('division')) return false;
+        if (fd.get('goal') && p.goal !== fd.get('goal')) return false;
+        if (fd.get('edu') && p.edu !== fd.get('edu')) return false;
+        if (fd.get('verified') && !p.verified) return false;
+        if (fd.get('online') && !p.online) return false;
+        if (langs.length && !langs.some(l => p.langs.includes(l))) return false;
+        if (ints.length && !ints.some(i => p.interests.includes(i))) return false;
+        return true;
+      });
+      const sort = document.getElementById('sortBy').value;
+      list.sort((a,b)=> sort==='age'? a.age-b.age : sort==='online'? (b.online-a.online) : b.match-a.match);
+      count.textContent = `${list.length} ${list.length===1?'person':'people'} found`;
+      empty.hidden = !!list.length; results.hidden = !list.length;
+      results.innerHTML = list.map(p=>profileCard(p,{compact:true})).join('');
+      results.querySelectorAll('[data-reveal]').forEach(e=>e.classList.add('in'));
+    }
+    form.addEventListener('submit', e=>{ e.preventDefault(); apply(); document.getElementById('filters').classList.remove('open'); });
+    document.getElementById('sortBy').addEventListener('change', apply);
+    document.getElementById('resetFilters').onclick = ()=>{ form.reset(); ageMin.value=18;ageMax.value=70;syncAge(); apply(); toast('Filters reset.','check'); };
+    document.getElementById('saveFilters').onclick = ()=>{ store.set('savedFilters', Object.fromEntries(new FormData(form))); toast('Filters saved to your account.','star'); };
+
+    // mobile drawer
+    document.getElementById('openFilters')?.addEventListener('click',()=>document.getElementById('filters').classList.add('open'));
+    document.getElementById('closeFilters')?.addEventListener('click',()=>document.getElementById('filters').classList.remove('open'));
+
+    // handle interactions
+    results.addEventListener('click', e=>{ const b=e.target.closest('[data-act]'); if(!b) return; e.preventDefault(); toast(b.dataset.act==='like'?'Liked!':b.dataset.act==='spark'?'Spark sent ✨':'Saved.', b.dataset.act==='like'?'heart':'star'); });
+
+    apply();
+  
+})();</script>
+</body>
+</html>

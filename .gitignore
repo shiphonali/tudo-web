@@ -1,0 +1,4 @@
+.DS_Store
+.claude/
+*.svgz
+node_modules/

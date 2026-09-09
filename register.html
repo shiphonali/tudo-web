@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Join TUDO · Create Your Free Profile</title>
+  <meta name="description" content="Create your free TUDO profile in a few thoughtful steps. For Bangladeshi adults 18+ worldwide." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+  <div class="auth">
+    <aside class="auth__aside">
+      <div class="aside-bg" style="background-image:url('assets/images/hero/slide2.jpg')"></div>
+      <div class="aside-ov"></div>
+      <a class="logo" href="index.html"><span class="logo__mark"></span>TU<b>DO</b></a>
+      <div>
+        <p class="eyebrow">Start your story</p>
+        <h1 class="display" style="font-size:clamp(2rem,4vw,3.4rem)">Find someone who feels like <span class="serif-accent grad-text">home</span>.</h1>
+        <p class="lead">A thoughtful profile leads to more genuine matches. Take your time — you can edit everything later.</p>
+        <ul class="stack mt-2">
+          <li class="flex gap-1 items-center"><span class="chip">18+ only</span><span class="text-sm muted">Adults, verified for trust</span></li>
+          <li class="flex gap-1 items-center"><span class="chip chip--gold">Private</span><span class="text-sm muted">You control who sees what</span></li>
+        </ul>
+      </div>
+      <p class="text-xs muted">Demo build. No data leaves your browser.</p>
+    </aside>
+
+    <main class="auth__main">
+      <div class="auth__card" style="max-width:520px">
+        <a class="logo mobile-only mb-2" href="index.html" style="justify-content:center"><span class="logo__mark"></span>TU<b>DO</b></a>
+        <div class="steps" aria-hidden="true">
+          <span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span>
+          <span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span>
+        </div>
+        <p id="stepLabel" class="text-sm gold mb-2">Step 1 of 8 — Account</p>
+
+        <form id="registerForm" novalidate>
+          <!-- STEP 1 -->
+          <fieldset class="reg-step" style="border:0;padding:0;margin:0">
+            <h2 class="h3">Create your account</h2>
+            <div class="grid cols-2" style="gap:1rem">
+              <div class="field"><label for="firstName">First name</label><input class="input" id="firstName" name="firstName" required placeholder="Aria" /><span class="error-msg"></span></div>
+              <div class="field"><label for="dob">Date of birth</label><input class="input" id="dob" name="dob" type="date" required /><span class="error-msg"></span></div>
+            </div>
+            <div class="grid cols-2" style="gap:1rem">
+              <div class="field"><label for="gender">Gender</label><select class="select" id="gender" name="gender" required><option value="">Select…</option><option>Woman</option><option>Man</option><option>Non-binary</option><option>Prefer to self-describe</option></select><span class="error-msg"></span></div>
+              <div class="field"><label for="seeking">Interested in</label><select class="select" id="seeking" name="seeking" required><option value="">Select…</option><option>Men</option><option>Women</option><option>Everyone</option></select><span class="error-msg"></span></div>
+            </div>
+            <div class="field"><label for="email">Email</label><input class="input" id="email" name="email" type="email" required placeholder="you@example.com" /><span class="error-msg"></span></div>
+            <div class="field"><label for="mobile">Mobile number</label><input class="input" id="mobile" name="mobile" type="tel" required placeholder="+44 7700 900000" /><span class="error-msg"></span></div>
+            <div class="grid cols-2" style="gap:1rem">
+              <div class="field"><label for="password">Password</label><input class="input" id="password" name="password" type="password" required placeholder="Min 6 characters" /><span class="error-msg"></span></div>
+              <div class="field"><label for="confirm">Confirm password</label><input class="input" id="confirm" name="confirm" type="password" required placeholder="Repeat password" /><span class="error-msg"></span></div>
+            </div>
+            <label class="check mt-1"><input type="checkbox" id="age18" name="age18" /> I confirm that I am 18 years of age or older.</label>
+          </fieldset>
+
+          <!-- STEP 2 -->
+          <fieldset class="reg-step" hidden style="border:0;padding:0;margin:0">
+            <h2 class="h3">Where are you?</h2>
+            <p class="muted text-sm mb-2">We only ever show approximate location — never your exact address.</p>
+            <div class="field"><label for="country">Country</label><select class="select" id="country" name="country" required><option value="">Select…</option><option>Bangladesh</option><option>United Kingdom</option><option>United States</option><option>Canada</option><option>Australia</option><option>UAE</option><option>Europe</option><option>Other</option></select><span class="error-msg"></span></div>
+            <div class="field"><label for="city">City</label><input class="input" id="city" name="city" required placeholder="e.g. London" /><span class="error-msg"></span></div>
+            <div class="field"><label for="division">Bangladesh division / home district <span class="muted">(optional)</span></label><select class="select" id="division" name="division"><option value="">Select…</option><option>Dhaka</option><option>Sylhet</option><option>Chattogram</option><option>Rajshahi</option><option>Khulna</option><option>Barishal</option><option>Rangpur</option><option>Mymensingh</option></select></div>
+          </fieldset>
+
+          <!-- STEP 3 -->
+          <fieldset class="reg-step" hidden style="border:0;padding:0;margin:0">
+            <h2 class="h3">What are you hoping to find?</h2>
+            <p class="muted text-sm mb-2">Be honest — it helps us surface people with the same intention.</p>
+            <div class="pill-group" role="radiogroup" aria-label="Relationship intent">
+              <label class="pill-opt"><input type="radio" name="intent" value="Dating" required /><span>💫 Dating</span></label>
+              <label class="pill-opt"><input type="radio" name="intent" value="Serious Relationship" /><span>💚 Serious Relationship</span></label>
+              <label class="pill-opt"><input type="radio" name="intent" value="Marriage" /><span>💍 Marriage</span></label>
+              <label class="pill-opt"><input type="radio" name="intent" value="Friendship" /><span>🤝 Friendship</span></label>
+              <label class="pill-opt"><input type="radio" name="intent" value="Open to Exploring" /><span>🧭 Open to Exploring</span></label>
+            </div>
+          </fieldset>
+
+          <!-- STEP 4 -->
+          <fieldset class="reg-step" hidden style="border:0;padding:0;margin:0">
+            <h2 class="h3">Add your photos</h2>
+            <p class="muted text-sm mb-2">Drag to reorder. Your first photo is your primary. Add up to 6.</p>
+            <div class="grid cols-3" id="photoGrid" style="gap:.8rem">
+              <div id="photoDrop" tabindex="0" role="button" style="aspect-ratio:3/4;border:1.5px dashed var(--line-strong);border-radius:14px;display:grid;place-items:center;text-align:center;cursor:pointer;padding:1rem;transition:border-color .2s">
+                <div><div style="font-size:2rem">＋</div><span class="text-xs muted">Drop or click<br/>to upload</span><input type="file" accept="image/*" multiple hidden /></div>
+              </div>
+            </div>
+            <p class="text-xs muted mt-2">Blurred, private and matched-only photo options are configured after signup.</p>
+          </fieldset>
+
+          <!-- STEP 5 -->
+          <fieldset class="reg-step" hidden style="border:0;padding:0;margin:0">
+            <h2 class="h3">Tell us about you</h2>
+            <div class="field"><label for="bio">Bio</label><textarea class="textarea" id="bio" name="bio" placeholder="A few honest lines about who you are and what you're looking for…"></textarea></div>
+            <div class="grid cols-2" style="gap:1rem">
+              <div class="field"><label for="occupation">Occupation</label><input class="input" id="occupation" name="occupation" placeholder="e.g. Architect" /></div>
+              <div class="field"><label for="education">Education</label><select class="select" id="education" name="education"><option value="">Select…</option><option>Secondary</option><option>College</option><option>Undergraduate</option><option>Graduate</option><option>Postgraduate</option><option>Doctorate</option></select></div>
+            </div>
+            <div class="field"><label>Interests <span class="muted">(pick a few)</span></label>
+              <div class="pill-group" id="interestPills"></div>
+            </div>
+            <div class="field"><label for="food">Favourite Bengali food</label><input class="input" id="food" name="food" placeholder="e.g. Kacchi biryani" /></div>
+          </fieldset>
+
+          <!-- STEP 6 -->
+          <fieldset class="reg-step" hidden style="border:0;padding:0;margin:0">
+            <h2 class="h3">Your match preferences</h2>
+            <div class="grid cols-2" style="gap:1rem">
+              <div class="field"><label for="pAgeFrom">Age from</label><input class="input" id="pAgeFrom" name="pAgeFrom" type="number" min="18" max="80" value="25" /></div>
+              <div class="field"><label for="pAgeTo">Age to</label><input class="input" id="pAgeTo" name="pAgeTo" type="number" min="18" max="80" value="38" /></div>
+            </div>
+            <div class="field"><label for="distance">Maximum distance: <span id="distVal" class="gold">80 km</span></label><input class="range" type="range" id="distance" name="distance" min="5" max="500" value="80" /></div>
+            <div class="field"><label for="pCountry">Preferred country</label><select class="select" id="pCountry" name="pCountry"><option>Anywhere</option><option>Bangladesh</option><option>United Kingdom</option><option>United States</option><option>Canada</option><option>Australia</option><option>UAE</option></select></div>
+            <p class="text-xs muted">Cultural &amp; personal preferences are optional and privacy-controlled in Settings.</p>
+          </fieldset>
+
+          <!-- STEP 7 -->
+          <fieldset class="reg-step" hidden style="border:0;padding:0;margin:0">
+            <h2 class="h3">Verify yourself</h2>
+            <p class="muted text-sm mb-2">Verification builds trust — but is never a guarantee another person is safe or truthful.</p>
+            <div class="stack">
+              <div class="glass flex between items-center" style="padding:1rem"><span>📧 Email verification</span><button type="button" class="btn btn--ghost btn--sm" id="sendOtp">Send code</button></div>
+              <div class="glass flex between items-center" style="padding:1rem"><span>📱 Mobile OTP</span><span class="chip chip--muted">Pending</span></div>
+              <div class="glass flex between items-center" style="padding:1rem"><span>🤳 Selfie / photo verification</span><span class="chip chip--muted">Optional</span></div>
+              <div class="glass flex between items-center" style="padding:1rem"><span>🪪 Enhanced identity <span class="muted">(later)</span></span><span class="chip chip--gold">Elite</span></div>
+            </div>
+          </fieldset>
+
+          <!-- STEP 8 -->
+          <fieldset class="reg-step" hidden style="border:0;padding:0;margin:0">
+            <h2 class="h3">Privacy configuration</h2>
+            <p class="muted text-sm mb-2">You're in control. Change any of these anytime.</p>
+            <div class="stack">
+              <label class="glass flex between items-center check" style="padding:.9rem 1rem"><span>Show my online status</span><input type="checkbox" name="pvOnline" checked /></label>
+              <label class="glass flex between items-center check" style="padding:.9rem 1rem"><span>Show approximate location</span><input type="checkbox" name="pvLoc" checked /></label>
+              <label class="glass flex between items-center check" style="padding:.9rem 1rem"><span>Let matched users see my photos</span><input type="checkbox" name="pvPhotos" checked /></label>
+              <label class="glass flex between items-center check" style="padding:.9rem 1rem"><span>Allow match requests from anyone</span><input type="checkbox" name="pvRequests" /></label>
+              <label class="glass flex between items-center check" style="padding:.9rem 1rem"><span>Marketing emails &amp; tips</span><input type="checkbox" name="pvMarketing" /></label>
+            </div>
+          </fieldset>
+
+          <div class="flex between items-center mt-3">
+            <button type="button" class="btn btn--ghost" id="regBack" style="visibility:hidden">← Back</button>
+            <button type="button" class="btn btn--primary btn--lg" id="regNext" data-magnetic>Continue</button>
+          </div>
+        </form>
+        <p class="text-xs muted mt-2">Already have an account? <a href="login.html" class="gold">Log in</a>.</p>
+      </div>
+    </main>
+  </div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script>(function(){
+    const host = document.getElementById('interestPills');
+    if (host) host.innerHTML = INTERESTS.map(i => `<label class="pill-opt"><input type="checkbox" name="interests" value="${i}"/><span>${i}</span></label>`).join('');
+    const dist = document.getElementById('distance'), dv = document.getElementById('distVal');
+    dist && dist.addEventListener('input', () => dv.textContent = dist.value + ' km');
+  
+})();</script>
+</body>
+</html>

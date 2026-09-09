@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>TUDO Safety Centre · Your Safety Comes First</title>
+  <meta name="description" content="The TUDO Safety Centre: profile verification, dating & online safety, scam awareness, privacy controls, and how to report or block someone." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 34c-6-4-10-8-10-13 0-3.4 2.7-5.6 5.6-5.6 2 0 3.5 1 4.4 2.6.9-1.6 2.4-2.6 4.4-2.6 2.9 0 5.6 2.2 5.6 5.6 0 5-4 9-10 13Z' fill='%2318A679'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+  <div data-nav></div>
+  <main style="padding-top:calc(var(--nav-h))">
+    <section class="section" style="position:relative;overflow:hidden">
+      <div class="jamdani-layer"></div>
+      <div class="wrap" style="position:relative;z-index:1;max-width:760px">
+        <p class="eyebrow">TUDO Safety Centre</p>
+        <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">Your safety comes <span class="serif-accent grad-text">before the match</span>.</h1>
+        <p class="lead">Safety is built into TUDO — verification, private controls and real reporting tools, free for everyone.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap grid cols-3" id="safetyTopics"></div>
+    </section>
+
+    <!-- Verification levels -->
+    <section class="section section--tight">
+      <div class="wrap">
+        <h2 class="h2 center mb-3">Three levels of verification</h2>
+        <div class="grid cols-3">
+          <div class="card" data-reveal><div class="chip mb-1">Level 1</div><h3 class="h3">Email verified</h3><p class="muted text-sm">Confirms a working email — the baseline for every member.</p></div>
+          <div class="card" data-reveal data-reveal-delay="1"><div class="chip mb-1">Level 2</div><h3 class="h3">Phone verified</h3><p class="muted text-sm">A verified mobile number adds a real layer of accountability.</p></div>
+          <div class="card" data-reveal data-reveal-delay="2"><div class="chip chip--gold mb-1">Level 3</div><h3 class="h3">Photo verified</h3><p class="muted text-sm">A live selfie is matched to profile photos to confirm they're really them.</p></div>
+        </div>
+        <div class="panel mt-3 flex gap-1 items-center" data-reveal>
+          <span style="font-size:1.6rem">ℹ️</span>
+          <p class="muted text-sm" style="margin:0">Verification improves confidence but is <strong>not a guarantee</strong> that another person is safe or truthful. Always trust your instincts.</p>
+        </div>
+        <div class="center mt-2"><a class="btn btn--primary" href="verification.html">Verify my profile</a></div>
+      </div>
+    </section>
+
+    <!-- Report / Block -->
+    <section class="section section--tight" id="report">
+      <div class="wrap grid cols-2" style="gap:1.4rem;align-items:start">
+        <div class="panel">
+          <h2 class="h3">Report someone</h2>
+          <p class="muted text-sm">Reports are confidential. Automated systems never make irreversible decisions alone — a human reviews serious reports, and appeals are always available.</p>
+          <form id="reportForm" class="mt-2">
+            <div class="field"><label>What happened?</label><select class="select" name="reason" required>
+              <option value="">Select a reason…</option><option>Fake profile</option><option>Underage user</option><option>Harassment</option><option>Spam</option><option>Scam</option><option>Impersonation</option><option>Inappropriate content</option><option>Threatening behaviour</option><option>Other</option></select></div>
+            <div class="field"><label>Description <span class="muted">(optional)</span></label><textarea class="textarea" name="desc" placeholder="Share any details that help us act."></textarea></div>
+            <div class="field"><label>Evidence <span class="muted">(optional)</span></label><input class="input" type="file" name="evidence"/></div>
+            <button class="btn btn--rose btn--block">Submit report</button>
+          </form>
+        </div>
+        <div class="stack">
+          <div class="panel"><h2 class="h3">Block someone</h2><p class="muted text-sm">Blocking is instant and free. Blocked users can't view your profile, message you, or appear in your discovery — and you won't appear in theirs.</p><a class="btn btn--ghost mt-1" href="discover.html">Manage from a profile</a></div>
+          <div class="panel"><h2 class="h3">Emergency information</h2><p class="muted text-sm">If you're in immediate danger, contact your local emergency services first.</p>
+            <ul class="stack mt-1 text-sm"><li class="flex between"><span>🇧🇩 Bangladesh</span><strong>999</strong></li><li class="flex between"><span>🇬🇧 United Kingdom</span><strong>999</strong></li><li class="flex between"><span>🇺🇸 United States</span><strong>911</strong></li><li class="flex between"><span>National Helpline (BD)</span><strong>109</strong></li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="wrap panel center" data-reveal><h2 class="h2">Read our Community Guidelines</h2><p class="lead" style="margin-inline:auto">The shared values that keep TUDO kind, honest and safe.</p><a class="btn btn--primary mt-1" href="community-guidelines.html">Community Guidelines</a></div>
+    </section>
+  </main>
+  <div data-footer></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/matching.js"></script>
+  <script>(function(){
+    boot('safety.html');
+    const topics = [
+      ['🛡️','Profile Verification','Understand our three verification levels and what each badge means.'],
+      ['💚','Dating Safety','Meet in public, tell a friend, and take things at your own pace.'],
+      ['🌐','Online Safety','Keep chats on TUDO and never share financial details.'],
+      ['📍','Meeting in Person','Use Share My Date and plan your own transport there and back.'],
+      ['⚠️','Scam Awareness','Recognise the signs — urgency, money requests and off-platform moves.'],
+      ['🔒','Privacy Controls','Decide who sees your photos, status and approximate location.'],
+      ['⚑','Report Someone','Confidential reporting with human review for serious cases.'],
+      ['🚫','Block Someone','Instant, free, and permanent until you choose otherwise.'],
+      ['📞','Emergency Information','Local emergency numbers and helplines, always one tap away.'],
+    ];
+    document.getElementById('safetyTopics').innerHTML = topics.map((t,i)=>`
+      <div class="card card--hover" data-reveal data-reveal-delay="${i%3}"><div style="font-size:1.8rem">${t[0]}</div><h3 class="h3" style="font-size:1.2rem;margin-top:.4rem">${t[1]}</h3><p class="muted text-sm">${t[2]}</p></div>`).join('');
+    document.getElementById('safetyTopics').querySelectorAll('[data-reveal]').forEach(e=>e.classList.add('in'));
+    document.getElementById('reportForm').addEventListener('submit', e=>{ e.preventDefault(); if(!e.target.reason.value){return;} e.target.reset(); toast('Thank you. Your report has been received.','shield'); });
+  
+})();</script>
+</body>
+</html>
