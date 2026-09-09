@@ -13,4 +13,4 @@ then visit http://localhost:8000
 ## Live
 Hosted on GitHub Pages.
 
-Contact: Tudo Devloy · 07944 497722
+Contact: Tudo Deploy · 07944 497722

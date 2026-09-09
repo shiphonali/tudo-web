@@ -206,7 +206,7 @@ function renderFooter() {
           <a class="logo" href="index.html"><span class="logo__mark">${ICON.logo}</span>TU<b>DO</b></a>
           <p class="muted" style="margin-top:1rem;max-width:34ch" data-i18n="foot.tag">Bangladeshi Hearts. Real Connections.</p>
           <p class="serif-accent gold bn" style="margin-top:.4rem">মন থেকে মন — বাংলাদেশ থেকে বিশ্বজুড়ে।</p>
-          <p class="text-sm" style="margin-top:1rem"><strong>Tudo Devloy</strong><br><a href="tel:+447944497722" class="gold" style="font-weight:600">📞 Call 07944 497722</a></p>
+          <p class="text-sm" style="margin-top:1rem"><strong>Tudo Deploy</strong><br><a href="tel:+447944497722" class="gold" style="font-weight:600">📞 Call 07944 497722</a></p>
           <div class="socials" style="margin-top:1.2rem">
             <a href="#" aria-label="Facebook">${ICON.fb}</a>
             <a href="#" aria-label="Instagram">${ICON.ig}</a>
